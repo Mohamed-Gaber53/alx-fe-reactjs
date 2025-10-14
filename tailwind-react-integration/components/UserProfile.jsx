@@ -1,4 +1,3 @@
-// src/components/UserProfile.jsx
 
 function UserProfile() {
   return (
@@ -18,3 +17,4 @@ function UserProfile() {
 }
 
 export default UserProfile;
+
