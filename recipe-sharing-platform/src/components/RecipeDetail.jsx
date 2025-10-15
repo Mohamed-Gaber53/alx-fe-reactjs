@@ -32,29 +32,33 @@ const RecipeDetail = () => {
         </h1>
         <p className="text-gray-600 mb-6">{recipe.summary}</p>
 
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-            Ingredients
-          </h2>
-          <ul className="list-disc list-inside text-gray-700 space-y-1">
-            <li>1 cup of flour</li>
-            <li>2 eggs</li>
-            <li>1/2 teaspoon salt</li>
-            <li>1 tablespoon butter</li>
-          </ul>
-        </div>
+        {/* ✅ Ingredients Section */}
+        {recipe.ingredients && (
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+              Ingredients
+            </h2>
+            <ul className="list-disc list-inside text-gray-700 space-y-1">
+              {recipe.ingredients.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-            Instructions
-          </h2>
-          <ol className="list-decimal list-inside text-gray-700 space-y-1">
-            <li>Mix all ingredients together.</li>
-            <li>Heat the pan over medium heat.</li>
-            <li>Cook until golden brown on both sides.</li>
-            <li>Serve and enjoy!</li>
-          </ol>
-        </div>
+        {/* ✅ Instructions Section */}
+        {recipe.instructions && (
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+              Instructions
+            </h2>
+            <ol className="list-decimal list-inside text-gray-700 space-y-1">
+              {recipe.instructions.map((step, index) => (
+                <li key={index}>{step}</li>
+              ))}
+            </ol>
+          </div>
+        )}
 
         <Link
           to="/"
