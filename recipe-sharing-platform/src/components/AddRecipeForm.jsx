@@ -10,8 +10,10 @@ function AddRecipeForm() {
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value, // ✅ هنا استخدمنا target.value
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -23,7 +25,6 @@ function AddRecipeForm() {
       return;
     }
 
-    // Optional: ingredients should have at least two items
     const ingredientsList = formData.ingredients.split(",").map((item) => item.trim());
     if (ingredientsList.length < 2) {
       setError("Please include at least two ingredients.");
@@ -33,7 +34,6 @@ function AddRecipeForm() {
     setError("");
     alert("Recipe added successfully! 🎉");
 
-    // Clear form after submission
     setFormData({
       title: "",
       ingredients: "",
@@ -49,7 +49,6 @@ function AddRecipeForm() {
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Title */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">Recipe Title</label>
           <input
@@ -62,7 +61,6 @@ function AddRecipeForm() {
           />
         </div>
 
-        {/* Ingredients */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">Ingredients</label>
           <textarea
@@ -75,7 +73,6 @@ function AddRecipeForm() {
           ></textarea>
         </div>
 
-        {/* Steps */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">Preparation Steps</label>
           <textarea
@@ -88,7 +85,6 @@ function AddRecipeForm() {
           ></textarea>
         </div>
 
-        {/* Submit */}
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200"
