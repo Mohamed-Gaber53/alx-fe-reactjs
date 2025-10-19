@@ -2,7 +2,7 @@
 // استخدم أي نموذج تريده (Controlled أو Formik)
 
 import RegistrationForm from "./components/RegistrationForm";
-import FormikForm from "./components/FormikForm";
+import FormikForm from "./components/formikForm";
 
 function App() {
   return (
