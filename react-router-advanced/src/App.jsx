@@ -12,6 +12,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
+      <BrowserRouter>
+
     <div>
       <Navbar />
       <Routes>
@@ -36,7 +38,14 @@ function App() {
         </Route>
       </Routes>
     </div>
+      </BrowserRouter>
+
   );
 }
 
 export default App;
+
+
+
+
+
