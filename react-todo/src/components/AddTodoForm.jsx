@@ -5,8 +5,10 @@ const AddTodoForm = ({ addTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(input);
-    setInput("");
+    if (input.trim()) {
+      addTodo(input);
+      setInput("");
+    }
   };
 
   return (
