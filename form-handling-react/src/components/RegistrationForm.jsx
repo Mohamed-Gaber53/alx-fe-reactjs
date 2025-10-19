@@ -4,22 +4,36 @@ const RegistrationForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState("");
   const [success, setSuccess] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!username || !email || !password) {
-      setError("⚠️ Please fill in all fields");
+    // ✅ Basic validation logic
+    if (!username) {
+      setErrors("Username is required");
       setSuccess("");
       return;
     }
 
-    setError("");
+    if (!email) {
+      setErrors("Email is required");
+      setSuccess("");
+      return;
+    }
+
+    if (!password) {
+      setErrors("Password is required");
+      setSuccess("");
+      return;
+    }
+
+    setErrors("");
     console.log("User Registered:", { username, email, password });
     setSuccess("✅ Registration successful!");
 
+    // Reset fields
     setUsername("");
     setEmail("");
     setPassword("");
@@ -64,7 +78,7 @@ const RegistrationForm = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {errors && <p style={{ color: "red" }}>{errors}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
 
       <button type="submit">Register</button>
