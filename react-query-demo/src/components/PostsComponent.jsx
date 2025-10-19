@@ -15,23 +15,27 @@ const PostsComponent = () => {
     isError,
     refetch,
     isFetching,
-  } = useQuery("posts", fetchPosts, {
-    staleTime: 5000, // 5 ثواني يعتبر الكاش صالح
-    cacheTime: 1000 * 60 * 5, // يحتفظ بالكاش 5 دقايق
+  } = useQuery({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
+    staleTime: 5000, // الكاش يفضل صالح 5 ثواني
+    cacheTime: 1000 * 60 * 5, // يحتفظ بالكاش 5 دقائق
+    refetchOnWindowFocus: true, // يعيد الجلب لما المستخدم يرجع للنافذة
+    keepPreviousData: true, // يحتفظ بالبيانات القديمة أثناء الجلب الجديد
   });
 
   if (isLoading) return <p>Loading posts...</p>;
   if (isError) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <button onClick={() => refetch()} disabled={isFetching}>
         {isFetching ? "Refreshing..." : "🔄 Refresh Posts"}
       </button>
 
       <ul>
-        {posts.slice(0, 10).map((post) => (
-          <li key={post.id}>
+        {posts?.slice(0, 10).map((post) => (
+          <li key={post.id} style={{ marginBottom: "15px" }}>
             <strong>{post.title}</strong>
             <p>{post.body}</p>
           </li>
