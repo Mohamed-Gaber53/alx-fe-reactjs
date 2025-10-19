@@ -20,7 +20,6 @@ const RegistrationForm = () => {
     console.log("User Registered:", { username, email, password });
     setSuccess("✅ Registration successful!");
 
-    // إعادة التعيين
     setUsername("");
     setEmail("");
     setPassword("");
