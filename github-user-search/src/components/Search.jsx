@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { fetchUserData } from "../services/githubService"; // ✅ لازم السطر ده
-import UserCard from "./UserCard";
+import { fetchUserData } from "../services/githubService";
 
 const Search = () => {
   const [query, setQuery] = useState("");
@@ -19,7 +18,7 @@ const Search = () => {
     setUsers([]);
 
     try {
-      const data = await fetchUserData(query, location, minRepos); // ✅ استدعاء الدالة
+      const data = await fetchUserData(query, location, minRepos);
       if (data.length === 0) {
         setError("Looks like we cant find the user");
       } else {
@@ -72,7 +71,28 @@ const Search = () => {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {users.map((user) => (
-          <UserCard key={user.id} user={user} />
+          <div
+            key={user.id}
+            className="p-4 border rounded shadow hover:shadow-lg transition"
+          >
+            <img
+              src={user.avatar_url}
+              alt={user.login}
+              className="w-20 h-20 rounded-full mx-auto"
+            />
+            <h2 className="text-center text-lg font-semibold mt-2">
+              {user.login}
+            </h2>
+            {/* ✅ html_url مضاف هنا */}
+            <a
+              href={user.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-center text-blue-500 mt-2"
+            >
+              View Profile
+            </a>
+          </div>
         ))}
       </div>
     </div>
