@@ -1,17 +1,26 @@
 import axios from "axios";
 
-const BASE_URL = "https://api.github.com";
-
-// ✅ البحث المتقدم باستخدام GitHub Search API
-export async function fetchAdvancedUserSearch(username, location, minRepos) {
+// ✅ دالة البحث المتقدمة
+export const fetchUserData = async (query, location, minRepos) => {
   try {
-    let query = `${username ? username : ""}`;
-    if (location) query += `+location:${location}`;
-    if (minRepos) query += `+repos:>${minRepos}`;
+    // بناء الرابط بالـ parameters
+    let searchQuery = query;
 
-    const response = await axios.get(`${BASE_URL}/search/users?q=${query}`);
-    return response.data.items;
+    if (location) {
+      searchQuery += `+location:${location}`;
+    }
+    if (minRepos) {
+      searchQuery += `+repos:>${minRepos}`;
+    }
+
+    // ✅ API endpoint الصحيح
+    const response = await axios.get(
+      `https://api.github.com/search/users?q=${searchQuery}`
+    );
+
+    return response.data.items; // GitHub بيرجع النتائج في .items
   } catch (error) {
-    throw new Error("Failed to fetch users");
+    console.error("Error fetching users:", error);
+    throw error;
   }
-}
+};
